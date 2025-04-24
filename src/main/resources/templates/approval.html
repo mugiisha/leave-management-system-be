@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Approved</title>
+</head>
+<body>
+    <h2>Account Approved</h2>
+    <p>Dear <span th:text="${firstName}"></span> <span th:text="${lastName}"></span>,</p>
+    <p>Your account has been approved. You have been assigned to the <span th:text="${departmentName}"></span> department.</p>
+    <p>You can now log in to the system using your email: <span th:text="${email}"></span></p>
+    <p>Welcome to the team!</p>
+</body>
+</html> 
