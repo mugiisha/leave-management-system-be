@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface LeaveRepository extends JpaRepository<Leave, Long> {
     List<Leave> findByUser(User user);
-    List<Leave> findByUseraAndOrderByCreatedAtDesc(User user);
+    List<Leave> findByUserAndOrderByCreatedAtDesc(User user);
     List<Leave> findByStatus(LeaveStatus status);
     List<Leave> findByLeaveType(LeaveType leaveType);
     List<Leave> findAllByOrderByCreatedAtDesc();
