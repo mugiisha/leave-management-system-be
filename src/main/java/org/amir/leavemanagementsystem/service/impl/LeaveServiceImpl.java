@@ -133,7 +133,7 @@ public class LeaveServiceImpl implements LeaveService {
 
     @Override
     public List<Leave> getAllLeaves() {
-        return leaveRepository.findAll();
+        return leaveRepository.findAllByOrderByCreatedAtDesc();
     }
 
     @Override
@@ -157,7 +157,7 @@ public class LeaveServiceImpl implements LeaveService {
     public List<Leave> getLeavesByUser(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
-        return leaveRepository.findByUser(user);
+        return leaveRepository.findByUseraAndOrderByCreatedAtDesc(user);
     }
 
     @Override

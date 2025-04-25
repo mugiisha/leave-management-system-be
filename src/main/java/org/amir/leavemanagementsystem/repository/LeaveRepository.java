@@ -14,8 +14,10 @@ import java.util.List;
 @Repository
 public interface LeaveRepository extends JpaRepository<Leave, Long> {
     List<Leave> findByUser(User user);
+    List<Leave> findByUseraAndOrderByCreatedAtDesc(User user);
     List<Leave> findByStatus(LeaveStatus status);
     List<Leave> findByLeaveType(LeaveType leaveType);
+    List<Leave> findAllByOrderByCreatedAtDesc();
     
     @Query("SELECT l FROM Leave l WHERE l.user.department.id = :departmentId")
     List<Leave> findByUserDepartmentId(@Param("departmentId") Long departmentId);
