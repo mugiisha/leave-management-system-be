@@ -157,7 +157,7 @@ public class LeaveServiceImpl implements LeaveService {
     public List<Leave> getLeavesByUser(Long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
-        return leaveRepository.findByUserAndOrderByCreatedAtDesc(user);
+        return leaveRepository.findByUserOrderByCreatedAtDesc(user);
     }
 
     @Override
