@@ -132,6 +132,17 @@ public class LeaveServiceImpl implements LeaveService {
     }
 
     @Override
+    public List<Leave> findByUserAndLeaveTypeAndStatus(User user, LeaveType type, LeaveStatus status) {
+        return leaveRepository.findByUserAndLeaveTypeAndStatus(user, type, status);
+    }
+
+    @Override
+    public List<Leave> findApprovedLeavesByDepartmentAndDate(Long departmentId, LeaveStatus status) {
+        LocalDate currentDate = LocalDate.now();
+        return leaveRepository.findApprovedLeavesByDepartmentAndDate(departmentId, status, currentDate);
+    }
+
+    @Override
     public List<Leave> getAllLeaves() {
         return leaveRepository.findAllByOrderByCreatedAtDesc();
     }

@@ -9,16 +9,20 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
 public interface LeaveRepository extends JpaRepository<Leave, Long> {
     List<Leave> findByUser(User user);
     List<Leave> findByUserOrderByCreatedAtDesc(User user);
+    List<Leave> findByUserAndLeaveTypeAndStatus(User user, LeaveType leaveType, LeaveStatus status);
     List<Leave> findByStatus(LeaveStatus status);
     List<Leave> findByLeaveType(LeaveType leaveType);
     List<Leave> findAllByOrderByCreatedAtDesc();
-    
+    @Query("SELECT l FROM Leave l WHERE l.user.department.id = :departmentId AND l.status = :status AND :currentDate BETWEEN l.startDate AND l.endDate")
+    List<Leave> findApprovedLeavesByDepartmentAndDate(@Param("departmentId") Long departmentId, @Param("status") LeaveStatus status, @Param("currentDate") LocalDate currentDate);
     @Query("SELECT l FROM Leave l WHERE l.user.department.id = :departmentId")
     List<Leave> findByUserDepartmentId(@Param("departmentId") Long departmentId);
     
